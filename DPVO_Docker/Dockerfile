@@ -20,8 +20,7 @@ RUN wget \
 
 RUN apt-get update
 
-RUN git clone https://github.com/princeton-vl/DPVO.git --recursive
-COPY install_dpvo.sh /DPVO/install_dpvo.sh
+RUN git clone https://github.com/Asher-1/DPVO.git --recursive
 WORKDIR /DPVO
 
 RUN wget https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.zip
@@ -35,6 +34,10 @@ RUN conda update conda
 RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 RUN pip install -U pip
 RUN conda env create -f environment.yml
+
+COPY install_dpvo.sh /DPVO/install_dpvo.sh
+COPY cmake-3.30.2-linux-x86_64.sh /DPVO/
+RUN chmod +x cmake-3.30.2-linux-x86_64.sh
 
 # This command runs your application, comment out this line to compile only
 CMD ["bash"]
